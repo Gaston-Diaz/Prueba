@@ -1,0 +1,22 @@
+function DecoradorPersona(data:string){
+    return function <T extends {new(...args: any[]):{}}>(constructor: T){
+        return class extends constructor{
+            array = data.split(",");
+            Nombre= this.array[0];
+            Apellido=this.array[1];
+        }
+    }
+}
+@DecoradorPersona('Juan,Lopez')
+class Persona{
+    private nombre:string="";
+    private apellido:string="";
+    private anoNac:number =0;
+
+    constructor(nombre:string, apellido:string){
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+}
+let persona= new Persona("Juan,Lopez","");
+console.log(persona.toString());
